@@ -54,3 +54,4 @@ webscraper/credentials.json
 webscraper/__pycache__/googlecalendar.cpython-36.pyc
 webscraper/__pycache__/albertheijn.cpython-36.pyc
 webscraper/geckodriver.log
+webscraper/__pycache__/htmlparser.cpython-36.pyc

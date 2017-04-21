@@ -7,3 +7,4 @@ Requests: `pip install requests`
 Httplib2: `pip install httplib2`
 Six: `pip install six`
 Uritemplate: `pip install uritemplate`
+pip install pyrfc3339

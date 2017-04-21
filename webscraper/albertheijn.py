@@ -49,8 +49,8 @@ class AlbertHeijn:
         Gets all the blocks from the schedule.
         :return: All blocks in a list.
         """
-        all_elements = self.driver.find_elements_by_xpath("//td[@height=\"62\"][@valign=\"top\"]")
-        return all_elements[21].get_attribute('outerHTML')
+        all_elements_container = self.driver.find_elements_by_xpath("//td[@height=\"62\"][@valign=\"top\"]")
+        return [element.get_attribute('outerHTML') for element in all_elements_container]
 
     def get_month(self):
         """
