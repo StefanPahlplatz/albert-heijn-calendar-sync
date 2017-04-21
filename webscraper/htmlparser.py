@@ -10,15 +10,16 @@ class Parser:
 
     def block_to_json(self, html, month, year):
         """
+        info index information:
         0 = day number      e.g. 19
         1 = start - end     e.g. (18:00 - 21:00) AH 152218:00 ~ 21:00geautoriseerd
         2 = start date      e.g. 18:00
         3 = end date        e.g. 21:00
         
-        :param html:
-        :param month: 
-        :param year: 
-        :return: 
+        :param html: Html text that contains the information from ah.get_blocks()
+        :param month: as 3 lettered string e.g. 'Apr'
+        :param year: as 4 digit int.
+        :return: json representation of the html.
         """
         soup = BeautifulSoup(str(html), 'html.parser')
         if 'calendarCellRegularPast' not in html:
@@ -43,6 +44,10 @@ class Parser:
         return self.jsonformat.replace('_start', startdate).replace('_end', enddate)
 
     def __init__(self):
+        """
+        Initialized the parser by creaing the json format 
+        and initializing the timezone.
+        """
         with open('settings.yaml') as s:
             settings = yaml.load(s)
 

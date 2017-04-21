@@ -1,5 +1,6 @@
 import json
 import time
+import yaml
 from selenium import webdriver
 
 LOGINPAGE = "https://sam.ahold.com/pingus_jct/idp/startSSO.ping?PartnerSpId=dingprod"
@@ -40,7 +41,9 @@ class AlbertHeijn:
         """
         Initializes a web client and logs the user in.
         """
-        self.driver = webdriver.Firefox(executable_path="C:\geckodriver.exe")
+        with open('settings.yaml') as s:
+            settings = yaml.load(s)
+        self.driver = webdriver.Firefox(executable_path=settings['geckopath'])
         self.__login()
         self.__load_schedule()
 

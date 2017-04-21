@@ -1,12 +1,14 @@
+# [MANDATORY]
 # Albert heijn credentials
 username: your-username
 password: your-password
 
+# Path to geckodriver.exe
+geckopath: path
+
+# [OPTIONAL]
 # Calendar event settings
 summary: Werken
 location: Albert Heijn
 description: Event created by Stefan Pahlplatz's webscraper.
 timezone: Europe/Amsterdam
-
-# Path to geckodriver.exe
-geckopath: path
