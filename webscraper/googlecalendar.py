@@ -17,7 +17,7 @@ except ImportError:
     flags = None
 
 # If modifying these scopes, delete your previously saved credentials
-# at ~/.credentials/calendar-python-quickstart.json
+# at "C:\Users\user\.credentials\albert-heijn-calendar-sync.json"
 SCOPES = 'https://www.googleapis.com/auth/calendar'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Albert Heijn Calendar Sync'
@@ -78,7 +78,7 @@ class Calendar:
     def insert_event(self, event):
         """ Inserts an event into the calendar.
         
-            :param event: JSON representation of the to be inserted event. Look at
-            https://developers.google.com/google-apps/calendar/create-events for reference.
+            :param event: JSON representation of the to be inserted event. For reference look at
+            https://developers.google.com/google-apps/calendar/create-events
         """
         self.service.events().insert(calendarId='primary', body=event).execute()
