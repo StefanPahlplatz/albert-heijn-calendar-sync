@@ -36,10 +36,9 @@ class Parser:
         endhour, endmin = [int(x) for x in info[3].split(":")]
 
         # Generate RFC-3339 dates
-        timezone = pytz.timezone('Europe/Amsterdam')
         # TODO: clean this up if possible
-        startdate = rfc.generate(timezone.localize(datetime(year, month, day, starthour, startmin)), utc=False)
-        enddate = rfc.generate(timezone.localize(datetime(year, month, day, endhour, endmin)), utc=False)
+        startdate = rfc.generate(self.timezone.localize(datetime(year, month, day, starthour, startmin)), utc=False)
+        enddate = rfc.generate(self.timezone.localize(datetime(year, month, day, endhour, endmin)), utc=False)
 
         return self.jsonformat.replace('_start', startdate).replace('_end', enddate)
 
@@ -47,8 +46,14 @@ class Parser:
         with open('settings.yaml') as s:
             settings = yaml.load(s)
 
+        # Json format for google calendar.
         self.jsonformat = '{"summary":"_summary","location":"_location","description":"_description",' +\
                           '"start":{"dateTime":"_start"},"end":{"dateTime":"_end"}}'
 
+        # Replace default values with user settings.
         self.jsonformat = self.jsonformat.replace('_summary', settings['summary'])\
-            .replace('_location', settings['location']).replace('_description', settings['description'])
+            .replace('_location', settings['location'])\
+            .replace('_description', settings['description'])
+
+        # Set the timezone.
+        self.timezone = pytz.timezone(settings['timezone'])

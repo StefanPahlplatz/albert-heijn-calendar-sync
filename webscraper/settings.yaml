@@ -3,10 +3,10 @@ username: your-username
 password: your-password
 
 # Calendar event settings
-summary: sum
-location: location
-description: desc
-timezone: tz
+summary: Werken
+location: Albert Heijn
+description: Event created by Stefan Pahlplatz's webscraper.
+timezone: Europe/Amsterdam
 
 # Path to geckodriver.exe
 geckopath: path
