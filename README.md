@@ -24,6 +24,7 @@ a google calendar api key and store the `client_secret.json` in `webscraper/`. (
 8. Uritemplate
 9. pyRFC3339
 10. pytz
+11. apiclient
 
 #### Install requirements
     pip install -r requirements.txt

@@ -46,7 +46,10 @@ class AlbertHeijn:
         if settings['showbrowser']:
             self.driver = webdriver.Firefox(executable_path=settings['geckopath'])
         else:
-            self.driver = webdriver.PhantomJS(executable_path=settings['phantomjspath'])
+            if settings['phantomjspath']:
+                self.driver = webdriver.PhantomJS(executable_path=settings['phantomjspath'])
+            else:
+                self.driver = webdriver.PhantomJS()
         print('Logging in...')
         self.__login()
         print('Loading the schedule...')
