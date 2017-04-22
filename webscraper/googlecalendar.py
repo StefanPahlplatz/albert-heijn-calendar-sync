@@ -7,6 +7,7 @@ from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
+from oauth2client import clientsecrets
 
 try:
     import argparse
@@ -43,7 +44,13 @@ class Calendar:
         store = Storage(credential_path)
         credentials = store.get()
         if not credentials or credentials.invalid:
-            flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+            try:
+                flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+            except clientsecrets.InvalidClientSecretsError:
+                print('Unable to locate client_secret.json. Please read the readme and make sure you have the' + \
+                      ' file in the webscraper folder')
+                exit()
+
             flow.user_agent = APPLICATION_NAME
             if flags:
                 credentials = tools.run_flow(flow, store, flags)

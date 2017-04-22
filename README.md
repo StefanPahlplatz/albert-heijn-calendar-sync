@@ -5,8 +5,14 @@
 
 - Change your settings in `webscraper/settings.yaml`
     - Change the albert-heijn credentials.
-    - Change the path to [PhantomJS](http://phantomjs.org/download.html).
-    
+    - Change the path to your [phantomjs.exe](http://phantomjs.org/download.html). 
+    On linux, install PhantomJS by installing the following:
+        ```
+        sudo apt-install nodejs
+        sudo apt-get install nodejs-legacy
+        sudo apt-get install npm
+        sudo npm -g install phantomjs-prebuilt
+        ```
 - [Request](https://console.developers.google.com/flows/enableapi?apiid=calendar)
 a google calendar api key and store the `client_secret.json` in `webscraper/`. ([Guide on how to request a key](https://developers.google.com/google-apps/calendar/quickstart/python))
 - Install the required dependencies.

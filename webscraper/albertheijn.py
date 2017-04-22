@@ -18,11 +18,15 @@ class AlbertHeijn:
             settings = yaml.load(s)
         # Create a firefox driver.
         self.driver.get(LOGINPAGE)
-        # Set the username and password.
-        self.driver.find_element_by_id('uid').send_keys(settings['username'])
-        self.driver.find_element_by_id('password').send_keys(settings['password'])
-        # Log in.
-        self.driver.find_element_by_id('form').submit()
+        try:
+            # Set the username and password.
+            self.driver.find_element_by_id('uid').send_keys(settings['username'])
+            self.driver.find_element_by_id('password').send_keys(settings['password'])
+            # Log in.
+            self.driver.find_element_by_id('form').submit()
+        except:
+            print('Couldn\'t load the login page.')
+
         time.sleep(1)
 
     def __load_schedule(self):
