@@ -10,5 +10,4 @@ geckopath: path
 # Calendar event settings
 summary: Werken
 location: Albert Heijn
-description: Event created by Stefan Pahlplatz's webscraper.
 timezone: Europe/Amsterdam
