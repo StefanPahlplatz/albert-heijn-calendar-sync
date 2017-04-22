@@ -56,3 +56,4 @@ webscraper/__pycache__/albertheijn.cpython-36.pyc
 webscraper/geckodriver.log
 webscraper/__pycache__/htmlparser.cpython-36.pyc
 webscraper/settings.yaml
+webscraper/ghostdriver.log

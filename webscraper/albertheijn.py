@@ -43,7 +43,10 @@ class AlbertHeijn:
         with open('settings.yaml') as s:
             settings = yaml.load(s)
         print('Initializing web driver...')
-        self.driver = webdriver.Firefox(executable_path=settings['geckopath'])
+        if settings['showbrowser']:
+            self.driver = webdriver.Firefox(executable_path=settings['geckopath'])
+        else:
+            self.driver = webdriver.PhantomJS(executable_path=settings['phantomjspath'])
         print('Logging in...')
         self.__login()
         print('Loading the schedule...')
