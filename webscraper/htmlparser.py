@@ -4,6 +4,7 @@ from datetime import datetime
 import calendar
 import pyrfc3339 as rfc
 import pytz
+import json
 
 
 class Parser:
@@ -41,7 +42,7 @@ class Parser:
         startdate = rfc.generate(self.timezone.localize(datetime(year, month, day, starthour, startmin)), utc=False)
         enddate = rfc.generate(self.timezone.localize(datetime(year, month, day, endhour, endmin)), utc=False)
 
-        return self.jsonformat.replace('_start', startdate).replace('_end', enddate)
+        return json.loads(self.jsonformat.replace('_start', startdate).replace('_end', enddate))
 
     def __init__(self):
         """
@@ -52,13 +53,12 @@ class Parser:
             settings = yaml.load(s)
 
         # Json format for google calendar.
-        self.jsonformat = '{"summary":"_summary","location":"_location","description":"_description",' +\
-                          '"start":{"dateTime":"_start"},"end":{"dateTime":"_end"}}'
+        self.jsonformat = '{"summary":"_summary","location":"_location","description":"Event created by ' +\
+                          'Stefan Pahlplatz\'s webscraper.","start":{"dateTime":"_start"},"end":{"dateTime":"_end"}}'
 
         # Replace default values with user settings.
         self.jsonformat = self.jsonformat.replace('_summary', settings['summary'])\
             .replace('_location', settings['location'])\
-            .replace('_description', settings['description'])
 
         # Set the timezone.
         self.timezone = pytz.timezone(settings['timezone'])

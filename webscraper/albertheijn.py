@@ -1,4 +1,3 @@
-import json
 import time
 import yaml
 from selenium import webdriver
@@ -43,8 +42,11 @@ class AlbertHeijn:
         """
         with open('settings.yaml') as s:
             settings = yaml.load(s)
+        print('Initializing web driver...')
         self.driver = webdriver.Firefox(executable_path=settings['geckopath'])
+        print('Logging in...')
         self.__login()
+        print('Loading the schedule...')
         self.__load_schedule()
 
     def get_blocks(self):

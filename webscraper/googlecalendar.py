@@ -1,13 +1,13 @@
 from __future__ import print_function
 import httplib2
 import os
+import datetime
+from calendar import monthrange
 
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
-
-import datetime
 
 try:
     import argparse
@@ -58,22 +58,27 @@ class Calendar:
 
             Creates a Google Calendar API service object.
         """
+        # Initialize a calendar connection.
         credentials = self.get_credentials()
         http = credentials.authorize(httplib2.Http())
         self.service = discovery.build('calendar', 'v3', http=http)
 
-        now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-        print('Getting the upcoming 10 events')
-        eventsresult = self.service.events().list(
-            calendarId='primary', timeMin=now, maxResults=10, singleEvents=True,
-            orderBy='startTime').execute()
-        events = eventsresult.get('items', [])
+        # Get the event bounds.
+        firstofmonth = datetime.datetime.today().replace(day=1).isoformat() + 'Z'  # 'Z' indicates UTC time
+        lastofmonth = datetime.datetime.today().replace(month=datetime.datetime.now().month + 1, day=1).isoformat() + \
+                      'Z'  # 'Z' indicates UTC time
 
-        if not events:
-            print('No upcoming events found.')
-        for event in events:
-            start = event['start'].get('dateTime', event['start'].get('date'))
-            print(start, event['summary'])
+        # Get this months events.
+        events_result = self.service.events().list(
+            calendarId='primary', timeMin=firstofmonth, timeMax=lastofmonth, maxResults=20, singleEvents=True,
+            orderBy='startTime').execute()
+
+        # Save the events to check for duplicates later.
+        self.events = events_result.get('items', [])
+        
+        # Filter events to only have work events.
+        self.events = [ev for ev in self.events if ev['description'] == 'Event created by Stefan Pahlplatz\'s ' +
+                       'webscraper.']
 
     def insert_event(self, event):
         """ Inserts an event into the calendar.
@@ -81,4 +86,9 @@ class Calendar:
             :param event: JSON representation of the to be inserted event. For reference look at
             https://developers.google.com/google-apps/calendar/create-events
         """
+        # Check if the event already exists.
+        if any(event['start']['dateTime'] == x['start']['dateTime'] for x in self.events):
+            return
+
+        # Insert event.
         self.service.events().insert(calendarId='primary', body=event).execute()
