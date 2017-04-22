@@ -3,11 +3,17 @@
 username: your-username
 password: your-password
 
-# Path to geckodriver.exe
-geckopath: path
+# Path to phantomjs.exe
+phantomjspath: path
 
 # [OPTIONAL]
 # Calendar event settings
 summary: Werken
 location: Albert Heijn
 timezone: Europe/Amsterdam
+
+# Show the browser (if true set geckopath)
+showbrowser: False
+
+# Path to geckodriver.exe
+geckopath: path
