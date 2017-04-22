@@ -23,7 +23,7 @@ class Parser:
         :return: json representation of the html.
         """
         soup = BeautifulSoup(str(html), 'html.parser')
-        if 'calendarCellRegularPast' not in html:
+        if not any(w in html for w in ['calendarCellRegularPast', 'calendarCellRegularFuture']):
             return None
 
         # Remove spaces
