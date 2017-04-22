@@ -15,13 +15,13 @@ class AlbertHeijn:
         :return: 
         """
         # Load the AH credentials.
-        with open('credentials.json') as data_file:
-            data = json.load(data_file)
+        with open('settings.yaml') as s:
+            settings = yaml.load(s)
         # Create a firefox driver.
         self.driver.get(LOGINPAGE)
         # Set the username and password.
-        self.driver.find_element_by_id('uid').send_keys(data['username'])
-        self.driver.find_element_by_id('password').send_keys(data['password'])
+        self.driver.find_element_by_id('uid').send_keys(settings['username'])
+        self.driver.find_element_by_id('password').send_keys(settings['password'])
         # Log in.
         self.driver.find_element_by_id('form').submit()
         time.sleep(1)
