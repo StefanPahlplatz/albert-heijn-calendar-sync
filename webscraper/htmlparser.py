@@ -18,7 +18,7 @@ class Parser:
         1 = start - end     e.g. (18:00 - 21:00) AH 152218:00 ~ 21:00geautoriseerd
         2 = start date      e.g. 18:00
         3 = end date        e.g. 21:00
-        
+
         :param html: Html text that contains the information from ah.get_blocks()
         :param month: as 3 lettered string e.g. 'Apr'
         :param year: as 4 digit int.
@@ -33,7 +33,7 @@ class Parser:
 
         # Convert the dates
         year = int(year)
-        month = list(calendar.month_abbr).index(month[:3])
+        month = ["", "Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"].index(month[:3])
         day = int(info[0])
         # TODO: clean this up if possible
         starthour, startmin = [int(x) for x in info[2].split(":")]
@@ -48,15 +48,14 @@ class Parser:
 
     def __init__(self):
         """
-        Initialized the parser by creaing the json format 
+        Initialized the parser by creaing the json format
         and initializing the timezone.
         """
         with open('settings.yaml') as s:
             settings = yaml.load(s)
 
         # Json format for google calendar.
-        self.jsonformat = '{"summary":"_summary","location":"_location","description":"Event created by ' +\
-                          'Stefan Pahlplatz\'s webscraper.","start":{"dateTime":"_start"},"end":{"dateTime":"_end"}}'
+        self.jsonformat = '{"summary":"_summary","location":"_location","description":"Event created by Stefan Pahlplatz's webscraper.","start":{"dateTime":"_start"},"end":{"dateTime":"_end"},"reminders":{"useDefault":"False","overrides":[{"method":"popup","minutes":60}]}}'
 
         # Replace default values with user settings.
         self.jsonformat = self.jsonformat.replace('_summary', settings['summary'])\

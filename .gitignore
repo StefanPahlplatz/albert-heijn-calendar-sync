@@ -57,3 +57,5 @@ webscraper/geckodriver.log
 webscraper/__pycache__/htmlparser.cpython-36.pyc
 webscraper/settings.yaml
 webscraper/ghostdriver.log
+
+webscraper/\.idea/inspectionProfiles/profiles_settings\.xml
