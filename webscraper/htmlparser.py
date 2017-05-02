@@ -55,11 +55,12 @@ class Parser:
             settings = yaml.load(s)
 
         # Json format for google calendar.
-        self.jsonformat = '{"summary":"_summary","location":"_location","description":"Event created by Stefan Pahlplatz\'s webscraper.","start":{"dateTime":"_start"},"end":{"dateTime":"_end"},"reminders":{"useDefault":"False","overrides":[{"method":"popup","minutes":60}]}}'
+        self.jsonformat = '{"summary":"_summary","location":"_location","description":"Event created by Stefan Pahlplatz\'s webscraper.","start":{"dateTime":"_start"},"end":{"dateTime":"_end"},"reminders":{"useDefault":"False","overrides":[{"method":"popup","minutes":_reminder}]}}'
 
         # Replace default values with user settings.
         self.jsonformat = self.jsonformat.replace('_summary', settings['summary'])\
             .replace('_location', settings['location'])\
+            .replace('_reminder', str(settings['reminder']))
 
         # Set the timezone.
         self.timezone = pytz.timezone(settings['timezone'])
