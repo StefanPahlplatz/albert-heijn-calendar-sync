@@ -76,7 +76,7 @@ class Calendar:
 
         # Get this months events.
         events_result = self.service.events().list(
-            calendarId='primary', timeMin=firstofmonth, timeMax=lastofmonth, maxResults=20, singleEvents=True,
+            calendarId='primary', timeMin=firstofmonth, timeMax=lastofmonth, maxResults=250, singleEvents=True,
             orderBy='startTime').execute()
 
         # Save the events to check for duplicates later.
