@@ -70,7 +70,7 @@ class Calendar:
         self.service = discovery.build('calendar', 'v3', http=http)
 
         # Get the event bounds.
-        firstofmonth = datetime.datetime.today().replace(day=1).isoformat() + 'Z'  # 'Z' indicates UTC time
+        firstofmonth = datetime.datetime.today().replace(day=1).replace(hour=0).isoformat() + 'Z'  # 'Z' indicates UTC time
         lastofmonth = datetime.datetime.today().replace(month=datetime.datetime.now().month + 1, day=1).isoformat() + \
                       'Z'  # 'Z' indicates UTC time
 
